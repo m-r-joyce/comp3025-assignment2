@@ -1,3 +1,38 @@
-<ion-item *ngIf="todo">
-    <ion-input [(ngModel)]="todo.name" placeholder="What needs to be done?"></ion-input>
-</ion-item>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+        <span *ngIf="todo">
+            Edit Todo
+        </span>
+        <span *ngIf="!todo">
+            Add Todo
+        </span>
+    </ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="cancelEdit()"><ion-icon name="close"></ion-icon></button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+ 
+<ion-content>
+    <ion-list>
+        <script>
+                console.log(todo);
+            </script>
+ 
+      <ion-item>
+        <ion-label floating>Name</ion-label>
+        <ion-input type="text" [(ngModel)]="name"></ion-input>
+      </ion-item>
+ 
+      <ion-item>
+        <ion-label floating>Notes</ion-label>
+        <ion-input type="text" [(ngModel)]="notes"></ion-input>
+      </ion-item>
+ 
+    </ion-list>
+ 
+    <button full ion-button (click)="saveTodo()">Save</button> 
+    <button full ion-button *ngIf="todo" (click)="deleteTodo()">Delete</button> 
+ 
+</ion-content>

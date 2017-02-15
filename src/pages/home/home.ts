@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
 
 import { Todo } from '../todo/todo';
 import { TodoService } from '../todo/todo.service';
+import { TodoDetail } from '../todo/todo-detail';
 
 @Component({
   selector: 'page-home',
@@ -12,8 +13,9 @@ import { TodoService } from '../todo/todo.service';
 export class HomePage implements OnInit {
 
   todos: Todo[];
+  todoDetail: TodoDetail;
 
-  constructor(public navCtrl: NavController, private todoService:TodoService) {
+  constructor(public navCtrl: NavController, public modalCtrl:ModalController, private todoService:TodoService) {
     
   }
 
@@ -23,6 +25,21 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.getTodos();
+  }
+
+  addTodo() {
+    let addTodoModal = this.modalCtrl.create(TodoDetail);
+    addTodoModal.onDidDismiss((todo) => {
+      if (todo) {
+        this.saveTodo(todo);
+      }
+    });
+
+    addTodoModal.present();
+  }
+
+  saveTodo(todo) {
+    this.todos.push(todo);
   }
 
 }
