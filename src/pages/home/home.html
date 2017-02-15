@@ -22,8 +22,10 @@
   <ion-list>
     <ion-item *ngFor="let todo of todos">
       <ion-checkbox [(ngModel)]="todo.completed"></ion-checkbox>
-      <ion-label [style.text-decoration]="todo.completed ? 'line-through' : 'none'">{{todo.name}}</ion-label>
-      <button item-right ion-button clear large icon-only (click)="deleteTodo(todo.name)">
+      <ion-label [style.text-decoration]="todo.completed ? 'line-through' : 'none'">{{todo.name}}
+        <small *ngIf="todo.notes"><br />{{todo.notes}}</small>
+      </ion-label>
+      <button item-right ion-button clear large icon-only (click)="editTodo(todo.id)">
         <ion-icon name="create"></ion-icon>
       </button>
     </ion-item>

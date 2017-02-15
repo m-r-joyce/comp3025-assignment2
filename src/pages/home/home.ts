@@ -14,7 +14,7 @@ export class HomePage implements OnInit {
 
   todos: Todo[];
 
-  constructor(public navCtrl: NavController, public modalCtrl:ModalController, private todoService:TodoService) {
+  constructor(public navCtrl: NavController, private todoService:TodoService) {
     
   }
 
@@ -34,9 +34,9 @@ export class HomePage implements OnInit {
     this.todoService.addTodo(name);
   }
 
-  deleteTodo(name: string): void {
-    this.todoService.deleteTodo(name);
-    this.getTodos();
+  editTodo(id: number): void {
+    this.navCtrl.push(TodoDetail, {
+      id: id
+    })
   }
-
 }

@@ -1,12 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      <span *ngIf="todo">
-        Edit Todo
-        </span>
-      <span *ngIf="!todo">
-        Add Todo
-        </span>
+        Todo Details
     </ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="cancelEdit()"><ion-icon name="close"></ion-icon></button>
@@ -16,19 +11,28 @@
 <ion-content>
   <ion-list>
     <ion-item>
-      <ion-label floating>Name</ion-label>
+      <ion-label>Name</ion-label>
       <ion-input type="text" [(ngModel)]="name"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label floating>Notes</ion-label>
+      <ion-label>Notes</ion-label>
       <ion-input type="text" [(ngModel)]="notes"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label floating>Completed</ion-label>
+      <ion-label>Completed</ion-label>
       <ion-checkbox [(ngModel)]="completed"></ion-checkbox>
     </ion-item>
   </ion-list>
-
-  <button ion-button (click)="saveTodo()">Save</button>
-  <button ion-button *ngIf="todo" (click)="deleteTodo()">Delete</button>
 </ion-content>
+<ion-footer>
+    <ion-grid>
+        <ion-row>
+            <ion-col width-50>
+                <button ion-button full (click)="saveTodo()">Save</button>
+            </ion-col>
+            <ion-col width-50>
+                <button ion-button full color="danger" (click)="deleteTodo()">Delete</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-footer>

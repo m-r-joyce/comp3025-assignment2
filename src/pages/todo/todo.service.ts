@@ -10,15 +10,24 @@ export class TodoService {
 
     addTodo(name: string): void {
         MOCKDATA.push({
+            id: MOCKDATA.length + 1,
             name: name,
             notes: '',
             completed: false
         })
     }
 
-    deleteTodo(name: string): void {
+    getTodo(id: number): Todo {
         for (var i = 0; i < MOCKDATA.length; i++) {
-            if (MOCKDATA[i].name == name) {
+            if (MOCKDATA[i].id == id) {
+                return MOCKDATA[i];
+            }
+        }
+    }
+
+    deleteTodo(id: number): void {
+        for (var i = 0; i < MOCKDATA.length; i++) {
+            if (MOCKDATA[i].id == id) {
                 MOCKDATA.splice(i, 1);
                 return;
             }
