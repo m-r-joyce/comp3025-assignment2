@@ -7,19 +7,14 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col width-80>
-        <ion-input type="text" placeholder="What do you need to do?" #todoName></ion-input>
-      </ion-col>
-      <ion-col width-20>
-        <button ion-button icon-only (click)="addTodo(todoName.value); todoName.value=''" color="secondary">
-          <ion-icon name="add"></ion-icon>
-        </button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
   <ion-list>
+    <ion-item>
+      <button item-right ion-button clear large icon-only (click)="addTodo(todoName.value); todoName.value=''" color="secondary">
+          <ion-icon name="add"></ion-icon>
+      </button>
+      <ion-input type="text" placeholder="What do you need to do?" #todoName>
+      </ion-input>
+    </ion-item>
     <ion-item *ngFor="let todo of todos">
       <ion-checkbox [(ngModel)]="todo.completed"></ion-checkbox>
       <ion-label [style.text-decoration]="todo.completed ? 'line-through' : 'none'">{{todo.name}}
@@ -34,7 +29,7 @@
 
 <ion-footer>
   <ion-toolbar color="primary">
-    <ion-label color="light">
+    <ion-label color="light" text-center>
       <ion-badge *ngIf="todos">{{todos.length}}</ion-badge> total todos
     </ion-label>
   </ion-toolbar>

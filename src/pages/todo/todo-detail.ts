@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Todo } from './todo';
 import { TodoService } from './todo.service';
@@ -22,6 +22,16 @@ export class TodoDetail {
 
     deleteTodo() {
         this.todoService.deleteTodo(this.id);
+        this.navCtrl.pop();
+    }
+
+    saveTodo() {
+        this.todo.id = this.id;
+        this.todo.name = this.name;
+        this.todo.notes = this.notes;
+        this.todo.completed = this.completed;
+
+        this.todoService.saveTodo(this.todo);
         this.navCtrl.pop();
     }
 

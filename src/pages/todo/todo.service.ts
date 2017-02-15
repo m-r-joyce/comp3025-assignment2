@@ -25,6 +25,10 @@ export class TodoService {
         }
     }
 
+    saveTodo(todo: Todo) {
+
+    }
+
     deleteTodo(id: number): void {
         for (var i = 0; i < MOCKDATA.length; i++) {
             if (MOCKDATA[i].id == id) {
