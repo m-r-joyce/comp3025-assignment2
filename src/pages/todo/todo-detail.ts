@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NavController, ViewController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { Todo } from './todo';
 
 @Component({
@@ -10,27 +10,8 @@ export class TodoDetail {
     @Input()
     todo: Todo;
 
-    name;
-    notes;
-
-    constructor(public navCtrl: NavController, public view: ViewController) {
-
+    constructor(public navCtrl: NavController) {
     }
 
-    saveTodo() {
-        let todo = {
-            name: this.name,
-            notes: this.notes
-        }
-        this.view.dismiss(todo);
-    }
-
-    deleteTodo() {
-        
-    }
-
-    cancelEdit() {
-        this.view.dismiss();
-    }
 
 }

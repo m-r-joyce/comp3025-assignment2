@@ -13,7 +13,6 @@ import { TodoDetail } from '../todo/todo-detail';
 export class HomePage implements OnInit {
 
   todos: Todo[];
-  todoDetail: TodoDetail;
 
   constructor(public navCtrl: NavController, public modalCtrl:ModalController, private todoService:TodoService) {
     
@@ -27,19 +26,17 @@ export class HomePage implements OnInit {
     this.getTodos();
   }
 
-  addTodo() {
-    let addTodoModal = this.modalCtrl.create(TodoDetail);
-    addTodoModal.onDidDismiss((todo) => {
-      if (todo) {
-        this.saveTodo(todo);
-      }
-    });
-
-    addTodoModal.present();
+  addTodo(name: string): void {
+    name = name.trim();
+    if (!name) { 
+      return; 
+    }
+    this.todoService.addTodo(name);
   }
 
-  saveTodo(todo) {
-    this.todos.push(todo);
+  deleteTodo(name: string): void {
+    this.todoService.deleteTodo(name);
+    this.getTodos();
   }
 
 }
