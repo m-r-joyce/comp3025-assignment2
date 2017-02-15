@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
         Todo Details
     </ion-title>
@@ -11,12 +11,12 @@
 <ion-content>
   <ion-list>
     <ion-item>
-      <ion-label>Name</ion-label>
+      <ion-label stacked>Name</ion-label>
       <ion-input type="text" [(ngModel)]="name"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Notes</ion-label>
-      <ion-input type="text" [(ngModel)]="notes"></ion-input>
+      <ion-label stacked>Notes</ion-label>
+      <ion-textarea [(ngModel)]="notes"></ion-textarea>
     </ion-item>
     <ion-item>
       <ion-label>Completed</ion-label>

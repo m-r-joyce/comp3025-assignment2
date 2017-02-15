@@ -13,8 +13,8 @@
         <ion-input type="text" placeholder="What do you need to do?" #todoName></ion-input>
       </ion-col>
       <ion-col width-20>
-        <button ion-button icon-only (click)="addTodo(todoName.value); todoName.value=''">
-          <ion-icon name="add-circle"></ion-icon>
+        <button ion-button icon-only (click)="addTodo(todoName.value); todoName.value=''" color="secondary">
+          <ion-icon name="add"></ion-icon>
         </button>
       </ion-col>
     </ion-row>
@@ -25,9 +25,17 @@
       <ion-label [style.text-decoration]="todo.completed ? 'line-through' : 'none'">{{todo.name}}
         <small *ngIf="todo.notes"><br />{{todo.notes}}</small>
       </ion-label>
-      <button item-right ion-button clear large icon-only (click)="editTodo(todo.id)">
+      <button item-right ion-button clear large icon-only (click)="editTodo(todo.id)" color="secondary">
         <ion-icon name="create"></ion-icon>
       </button>
     </ion-item>
   </ion-list>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-label color="light">
+      <ion-badge *ngIf="todos">{{todos.length}}</ion-badge> total todos
+    </ion-label>
+  </ion-toolbar>
+</ion-footer>
