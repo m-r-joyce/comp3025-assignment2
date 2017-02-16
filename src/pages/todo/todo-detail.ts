@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { Todo } from './todo';
-import { TodoService } from './todo.service';
 
 @Component({
     selector: 'todo-detail',
@@ -9,38 +9,27 @@ import { TodoService } from './todo.service';
 })
 export class TodoDetail {
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public todoService: TodoService) {
-        
-    }
+    todos: FirebaseListObservable<any>;
+    id: string;
 
-    id = this.navParams.get('id');
-    todo = this.getTodo()
-
-    name = this.todo.name;
-    notes = this.todo.notes;
-    completed = this.todo.completed;
-
-    deleteTodo() {
-        this.todoService.deleteTodo(this.id);
-        this.navCtrl.pop();
+    constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
+        this.todos = af.database.list('/todos');
+        this.id = navParams.get('id');
     }
 
     saveTodo() {
-        this.todo.id = this.id;
-        this.todo.name = this.name;
-        this.todo.notes = this.notes;
-        this.todo.completed = this.completed;
 
-        this.todoService.saveTodo(this.todo);
         this.navCtrl.pop();
+
     }
 
     cancelEdit() {
         this.navCtrl.pop();
     }
 
-    getTodo(): Todo {
-        return this.todoService.getTodo(this.id);
+    deleteTodo(name: string) {
+        this.af.database.list('/todos/' + name).remove();
+        this.navCtrl.pop();
     }
 
 }

@@ -3,9 +3,6 @@
     <ion-title>
         Todo Details
     </ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only (click)="cancelEdit()"><ion-icon name="close"></ion-icon></button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -27,11 +24,14 @@
 <ion-footer>
     <ion-grid>
         <ion-row>
-            <ion-col width-50>
-                <button ion-button full (click)="saveTodo()">Save</button>
+            <ion-col width-33>
+                <button ion-button full (click)="saveTodo(id, name, notes, completed)">Save</button>
             </ion-col>
-            <ion-col width-50>
-                <button ion-button full color="danger" (click)="deleteTodo()">Delete</button>
+            <ion-col width-33>
+                <button ion-button full color="secondary" (click)="cancelEdit()">Cancel</button>
+            </ion-col>
+            <ion-col width-33>
+                <button ion-button full color="danger" (click)="deleteTodo(id)">Delete</button>
             </ion-col>
         </ion-row>
     </ion-grid>

@@ -15,12 +15,12 @@
       <ion-input type="text" placeholder="What do you need to do?" #todoName>
       </ion-input>
     </ion-item>
-    <ion-item *ngFor="let todo of todos">
+    <ion-item *ngFor="let todo of todos | async">
       <ion-checkbox [(ngModel)]="todo.completed"></ion-checkbox>
       <ion-label [style.text-decoration]="todo.completed ? 'line-through' : 'none'">{{todo.name}}
         <small *ngIf="todo.notes"><br />{{todo.notes}}</small>
       </ion-label>
-      <button item-right ion-button clear large icon-only (click)="editTodo(todo.id)" color="secondary">
+      <button item-right ion-button clear large icon-only (click)="editTodo(todo.$key)" color="secondary">
         <ion-icon name="create"></ion-icon>
       </button>
     </ion-item>
@@ -30,7 +30,7 @@
 <ion-footer>
   <ion-toolbar color="primary">
     <ion-label color="light" text-center>
-      <ion-badge *ngIf="todos">{{todos.length}}</ion-badge> total todos
+      <ion-badge *ngIf="todos.length > 0">{{todos.length}} total todos</ion-badge>
     </ion-label>
   </ion-toolbar>
 </ion-footer>

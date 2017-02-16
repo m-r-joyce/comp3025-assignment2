@@ -1,42 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
 
-import { NavController, ModalController } from 'ionic-angular';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
-import { Todo } from '../todo/todo';
-import { TodoService } from '../todo/todo.service';
+// import { Todo } from '../todo/todo';
+// import { TodoService } from '../todo/todo.service';
 import { TodoDetail } from '../todo/todo-detail';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage implements OnInit {
+export class HomePage {
 
-  todos: Todo[];
+  todos: FirebaseListObservable<any>;
 
-  constructor(public navCtrl: NavController, private todoService:TodoService) {
-    
-  }
-
-  getTodos() {
-    this.todoService.getTodos().then(todos => this.todos = todos);
-  }
-
-  ngOnInit() {
-    this.getTodos();
-  }
-
-  addTodo(name: string): void {
-    name = name.trim();
-    if (!name) { 
-      return; 
+  constructor(public navCtrl: NavController, public navParams: NavParams, af: AngularFire) {
+      this.todos = af.database.list('/todos');
     }
-    this.todoService.addTodo(name);
+
+  addTodo(todoName) {
+      let ref = this.todos.push({
+        name: todoName,
+        notes: '',
+        completed: false
+      });
   }
 
-  editTodo(id: number): void {
+  editTodo(id) {
     this.navCtrl.push(TodoDetail, {
       id: id
-    })
+    });
   }
 }
