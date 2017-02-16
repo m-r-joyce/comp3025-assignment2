@@ -16,11 +16,11 @@
       </ion-input>
     </ion-item>
     <ion-item *ngFor="let todo of todos | async">
-      <ion-checkbox [(ngModel)]="todo.completed"></ion-checkbox>
+      <ion-checkbox [(ngModel)]="todo.completed" (click)="updateStatus(todo.$key, todo.completed)"></ion-checkbox>
       <ion-label [style.text-decoration]="todo.completed ? 'line-through' : 'none'">{{todo.name}}
         <small *ngIf="todo.notes"><br />{{todo.notes}}</small>
       </ion-label>
-      <button item-right ion-button clear large icon-only (click)="editTodo(todo.$key)" color="secondary">
+      <button item-right ion-button clear large icon-only (click)="editTodo(todo.$key, todo.name, todo.notes, todo.completed)" color="secondary">
         <ion-icon name="create"></ion-icon>
       </button>
     </ion-item>

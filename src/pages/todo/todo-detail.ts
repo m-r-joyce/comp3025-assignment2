@@ -9,26 +9,19 @@ import { Todo } from './todo';
 })
 export class TodoDetail {
 
-    todos: FirebaseListObservable<any>;
+    todo: Todo;
     id: string;
+    name: string;
+    notes: string;
+    completed: boolean;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFire) {
-        this.todos = af.database.list('/todos');
-        this.id = navParams.get('id');
-    }
-
-    saveTodo() {
-
-        this.navCtrl.pop();
-
+    constructor(public navCtrl: NavController, private navParams: NavParams, private af: AngularFire) {
+        this.name = navParams.get('name');
+        this.notes = navParams.get('notes');
+        this.completed = navParams.get('completed');
     }
 
     cancelEdit() {
-        this.navCtrl.pop();
-    }
-
-    deleteTodo(name: string) {
-        this.af.database.list('/todos/' + name).remove();
         this.navCtrl.pop();
     }
 
