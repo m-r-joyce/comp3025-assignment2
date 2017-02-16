@@ -7,3 +7,4 @@ This application allows users to create, modify, and delete todos. The applicati
 
 **Optional app features included:**
 - Connect your App to Firebase or other online data storage solution.
+- Include a count of your Todos on your Todo List View.

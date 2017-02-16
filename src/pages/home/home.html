@@ -16,7 +16,7 @@
       </ion-input>
     </ion-item>
     <ion-item *ngFor="let todo of todos | async">
-      <ion-checkbox [(ngModel)]="todo.completed" (click)="updateStatus(todo.$key, todo.completed)"></ion-checkbox>
+      <ion-checkbox color="danger" [(ngModel)]="todo.completed" (click)="updateStatus(todo.$key, todo.completed)"></ion-checkbox>
       <ion-label [style.text-decoration]="todo.completed ? 'line-through' : 'none'">{{todo.name}}
         <small *ngIf="todo.notes"><br />{{todo.notes}}</small>
       </ion-label>
@@ -30,7 +30,7 @@
 <ion-footer>
   <ion-toolbar color="primary">
     <ion-label color="light" text-center>
-      <ion-badge>{{ todos | async }}</ion-badge>
+      <ion-badge>{{ total }} todos</ion-badge>
     </ion-label>
   </ion-toolbar>
 </ion-footer>

@@ -25,9 +25,11 @@ import { TodoDetail } from '../todo/todo-detail';
 export class HomePage implements OnInit {
 
   todos: FirebaseListObservable<any>;
+  total: number;
 
   constructor(public navCtrl: NavController, private af: AngularFire) {
-
+    // Listen for current number of Todos in the database list.
+    this.af.database.list('/todos/').subscribe(result => { this.total = (result.length) });
   }
 
   /**
