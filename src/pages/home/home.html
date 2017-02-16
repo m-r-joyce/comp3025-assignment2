@@ -1,3 +1,12 @@
+<!--
+  home.html
+  Start page of application; contains list and count of todos retrieved from Firebase.
+  Contains input for new todos and buttons for editing existing todos.
+  Contains checkbox to update status of todos.
+  author: Michael Joyce 200284329
+-->
+
+<!-- START Fixed Header -->
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>
@@ -5,9 +14,12 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
+<!-- END Fixed Header -->
 
+<!-- START Content -->
 <ion-content>
   <ion-list>
+    <!-- START Add new todo -->
     <ion-item>
       <button item-right ion-button clear large icon-only (click)="addTodo(todoName.value); todoName.value=''" color="secondary">
           <ion-icon name="add"></ion-icon>
@@ -15,22 +27,31 @@
       <ion-input type="text" placeholder="What do you need to do?" #todoName>
       </ion-input>
     </ion-item>
+    <!-- END Add new todo -->
+    <!-- START Async list of todos -->
     <ion-item *ngFor="let todo of todos | async">
+      <!-- CHECKBOX modifies data in database, reflect value in style (line-through) -->
       <ion-checkbox color="danger" [(ngModel)]="todo.completed" (click)="updateStatus(todo.$key, todo.completed)"></ion-checkbox>
       <ion-label [style.text-decoration]="todo.completed ? 'line-through' : 'none'">{{todo.name}}
         <small *ngIf="todo.notes"><br />{{todo.notes}}</small>
       </ion-label>
+      <!-- EDIT this row's todo -->
       <button item-right ion-button clear large icon-only (click)="editTodo(todo.$key, todo.name, todo.notes, todo.completed)" color="secondary">
         <ion-icon name="create"></ion-icon>
       </button>
     </ion-item>
+    <!-- END Async list of todos -->
   </ion-list>
 </ion-content>
+<!-- END Content -->
 
+<!-- START Fixed Footer -->
 <ion-footer>
   <ion-toolbar color="primary">
     <ion-label color="light" text-center>
+      <!-- Total count of todos; initialized to 0 -->
       <ion-badge>{{ total }} todos</ion-badge>
     </ion-label>
   </ion-toolbar>
 </ion-footer>
+<!-- END Fixed Footer -->
